@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>XosX</title>
+    <meta name="apple-mobile-web-app-title" content="XosX">
+    <meta name="application-name" content="XosX">
+
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link rel="apple-touch-icon" href="logo.jpg">
+
+    <meta property="og:title" content="XosX">
+    <meta property="og:image" content="logo.jpg">
+    <meta name="description" content="XosX | Destek Vermek İçin Sende Katıl!">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Profil resmi stili */
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #1a56ff;
+            margin-bottom: 15px;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(26, 86, 255, 0.5);
+        }
+
+        #main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="enter-screen" onclick="startPage()">
+        <p class="enter-text">[ CLICK TO ENTER ]</p>
+    </div>
+
+    <div id="volume-control" class="volume-container" style="display: none;">
+        <i id="volume-icon" class="fa-solid fa-volume-high"></i>
+        <div class="volume-bar-bg">
+            <div id="volume-bar" class="volume-bar-red"></div>
+        </div>
+    </div>
+
+    <div class="video-background">
+        <iframe id="yt-player" 
+            src="https://www.youtube.com/embed/MJXHVdWzPks?autoplay=1&mute=1&controls=0&loop=1&playlist=MJXHVdWzPks&showinfo=0&rel=0&enablejsapi=1" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media">
+        </iframe>
+    </div>
+
+    <div id="main-content">
+        <div class="profile-card">
+            <img src="logo.jpg" alt="XosX" class="profile-img">
+            
+            <h1 class="main-title">XosX</h1>
+            <p class="subtitle">Sende destek vermek için hemen üKATIL!</p>
+            <div class="location"><i class="fa-solid fa-location-dot"></i> Turkey</div>
+            
+            <p class="hub-text">XosX</p>
+            <div class="social-icons">
+                <a href="https://www.youtube.com/@OriginalXosX" target="_blank" class="icon-link"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+        </div>
+    </div>
+
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Video hazır
+        }
+
+        function startPage() {
+            document.getElementById('enter-screen').style.display = 'none';
+            document.getElementById('main-content').style.opacity = '1';
+            document.getElementById('volume-control').style.display = 'flex';
+            if (player) {
+                player.unMute();
+                player.setVolume(50);
+                player.playVideo();
+            }
+        }
+
+        let isMuted = false;
+        document.getElementById('volume-control').onclick = function() {
+            if (isMuted) {
+                player.unMute();
+                document.getElementById('volume-icon').className = "fa-solid fa-volume-high";
+                document.getElementById('volume-bar').style.width = "100%";
+            } else {
+                player.mute();
+                document.getElementById('volume-icon').className = "fa-solid fa-volume-xmark";
+                document.getElementById('volume-bar').style.width = "0%";
+            }
+            isMuted = !isMuted;
+        };
+    </script>
+</body>
+</html>
