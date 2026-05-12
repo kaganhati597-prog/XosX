@@ -1,0 +1,77 @@
+/* Siyah Arka Planı Sildik, Videoyu Sabitledik */
+body, html {
+    margin: 0; padding: 0; height: 100%;
+    background: transparent; /* Siyahlık kaldırıldı */
+    color: white;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+.video-background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -10; /* En arkaya ittik */
+    pointer-events: none;
+}
+
+#yt-player {
+    width: 100vw;
+    height: 56.25vw; /* 16:9 oran */
+    min-height: 100vh;
+    min-width: 177.77vh; /* Oranı korumak için */
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    filter: brightness(0.4); /* Videonun parlamasını azaltır, kartı öne çıkarır */
+}
+
+/* Giriş Ekranı */
+#enter-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000;
+    z-index: 100;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer;
+}
+
+.enter-text {
+    font-size: 20px; letter-spacing: 5px; color: #ff0000;
+    text-shadow: 0 0 15px #ff0000;
+}
+
+/* Kart Tasarımı */
+#main-content {
+    opacity: 0; transition: opacity 1s;
+    display: flex; justify-content: center; align-items: center; height: 100vh;
+    position: relative;
+    z-index: 10;
+}
+
+.profile-card {
+    background: rgba(0, 0, 0, 0.7); /* Kartın arkası hafif şeffaf */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    padding: 40px; border-radius: 15px; width: 350px; text-align: center;
+}
+
+.main-title { font-size: 45px; color: #ff0000; text-shadow: 0 0 15px #ff0000; margin: 0; }
+.subtitle { color: #ff0000; font-weight: bold; margin: 15px 0; }
+.hub-text { color: #ff0000; font-weight: bold; margin-top: 20px; }
+.discord-hint { font-size: 10px; color: #666; margin-bottom: 20px; }
+
+/* Ses Paneli */
+.volume-container {
+    position: fixed; top: 20px; right: 20px;
+    background: linear-gradient(to right, #001a4d, #003399);
+    padding: 10px 15px; border-radius: 10px;
+    display: none; align-items: center; gap: 10px;
+    border: 2px solid #0055ff; z-index: 110; cursor: pointer;
+}
+.volume-bar-bg { width: 80px; height: 8px; background: #000; border-radius: 5px; overflow: hidden; }
+.volume-bar-red { width: 100%; height: 100%; background: #ff0000; }
+#volume-icon { color: #ff0000; }
+
+.social-icons { display: flex; justify-content: center; gap: 20px; }
+.icon-link { color: white; font-size: 30px; }
